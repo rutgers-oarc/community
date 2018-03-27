@@ -96,18 +96,20 @@ This means that only a file's owner, a directory's owner, or root can rename or 
 /projects/community/compiler-name/version/mpi-name/version/cuda/version/pkg-name/version/NetID</p>
 
 
-
+<br>
 <p><strong>Good Housekeeping and Reproducibility in Research</strong></p>
 
-<p>All contributed software packages MUST have a README.OARC file created and stored in the directory containing the installed software. This file must include your contact info and any useful information about the software. This file should include all commands used to build the package since this information is important for anyone wishing to use contributed software for research purposes.</p>
+<p>(1) All contributed software packages MUST have a README.OARC file created and stored in the directory containing the installed software. This file must include your contact info and any useful information about the software. This file should include all commands used to build the package since this information is important for anyone wishing to use contributed software for research purposes.</p>
 
 <p>There is a long but useful example README.OARC file in /projects/community/gcc/7.3.0/gc563</p>
 
+<p>(2) All contributed software packages MUST have an associated <a href=http://lmod.readthedocs.io/en/latest>Lmod modulefile</a> so users can easily access the software. There are details for doing this and examples below.</p>
 
 
+<br>
 <p><strong>An Example: GCC-7.3.0</strong></p>
 
-<p>March 23, 2018: I want to build my own GCC compiler suite. Here's where I will start: I'll bootstrap using the core/default tools that come with the version of CentOS installed on Amarel. That version (at the time of this writing) is
+<p>March 23, 2018: I want to build GCC, The GNU Compiler Collection, version 7.3.0 since a project I'm working on requires it, but GCC-7.3.0 is not already setup on Amarel. I'll begin by "bootstraping" using the core/default tools that come with the version of CentOS installed on Amarel. That version (at the time of this writing) is
 
 <figure class=highlight><pre><code class=language-html data-lang=html>$ cat /etc/*release | head -n 1
 CentOS Linux release 7.4.1708 (Core)</code></pre></figure>
@@ -190,6 +192,13 @@ Finally, I need to copy my newly created executables and/or libraries to their f
 
 <figure class=highlight><pre><code class=language-html data-lang=html>$ make install
 $ cd .. ; rm -rf gcc-7.3.0*</code></pre></figure></p>
+
+
+
+<p><strong>Modulefiles for Community-Contributed Packages</strong></p>
+
+<p><u>Directory structure for modulefiles (omit parts that aren't used, like /CUDA/version or /mpi-name/version):</u><br>
+/projects/community/modulefiles/compiler-name/version/mpi-name/version/CUDA/version/pkg-name/version/NetID</p>
 
 
 
