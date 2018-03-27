@@ -41,7 +41,7 @@
     </header>
     <div class=bs-docs-header id=content tabindex=-1>
         <div class=container>
-            <h2><strong>Amarel Community Resources</strong></h2>
+            <h2><strong>Amarel Community Resources <i>(BETA)</i></strong></h2>
             <p>Useful resources contributed or setup by members of the Amarel Research Computing Community for the benefit of fellow members</p>
         </div>
     </div>
@@ -57,11 +57,22 @@
                     <p><strong>Log-in to Amarel or Perceval and check out /projects/community</strong></p>
                     <p>Have you created a particularly fast build of your favorite simulation tool? Have you compiled a packaged that's notoriously hard to compile? Want to share some software with collaborators within the Amarel user community?</p>
                     <p>OARC has setup a dedicated repository for community-contributed software and associated modulefiles in /projects/community. All Amarel and Perceval users can contribute software to this repository. We have established some basic guidelines to help keep things organized.</p>
+                    <br>
+                    <p>If you would like to see the community-contributed software packages when you run the 'module avail' or 'module spider' command, add /projects/community/modulefiles to your MODULEPATH,
+<figure class=highlight><pre><code class=language-html data-lang=html>$ export MODULEPATH=$MODULEPATH:/projects/community/modulefiles</code></pre></figure>
+or add that line to your ~/.bashrc file for that setting to persist.</p>
 
 <br>
 <p><strong>A Note About Governance</strong></p>
 
 <p>Please follow the guidelines presented here. The OARC research support team will remove or edit contributions that do not conform to these guidelines. If you find any problems or if you have questions, please let us know by sending a message to <a href=mailto:help@hpc.rutgers.edu>help@hpc.rutgers.edu</a></p>
+
+
+<br>
+<p><strong>User Support</strong></p>
+
+<p>Contributed software is officially unsupported. However, individual users who setup contributed software may be willing to answer basic questions about useability, performance, or selected build options. We certainly want to encourage users to contribute software, but at the same time, we do not want to burden busy researchers with support expectations. Be considerate if you contact a user about contributed software.</p>
+
 
 <br>
 <p><strong>Permissions</strong></p>
@@ -197,8 +208,42 @@ $ cd .. ; rm -rf gcc-7.3.0*</code></pre></figure></p>
 
 <p><strong>Modulefiles for Community-Contributed Packages</strong></p>
 
+<p>All contributed software packages MUST have an associated <a href=http://lmod.readthedocs.io/en/latest>Lmod modulefile</a> so users can easily access the software.</p>
+
 <p><u>Directory structure for modulefiles (omit parts that aren't used, like /CUDA/version or /mpi-name/version):</u><br>
 /projects/community/modulefiles/compiler-name/version/mpi-name/version/CUDA/version/pkg-name/version/NetID</p>
+
+<p>Here's an example Lmod modulefile for the GCC-7.3.0 example (above):</p>
+<figure class=highlight><pre><code class=language-html data-lang=html>help(
+[[
+This module loads the GNU Compiler Collection version 7.3.0. 
+The GNU Compiler Collection includes front ends for C, C++, Fortran, as well as libraries for these languages.
+]])
+
+whatis("Description: GCC: the GNU Compiler Collection")
+whatis("URL: https://gcc.gnu.org")
+
+conflict("gcc")
+
+load("gmp/6.1.2-gc563")
+load("mpfr/4.0.1-gc563")
+load("mpc/1.1.0-gc563")
+
+local base = pathJoin("/projects/community", myModuleName(), "7.3.0", "gc563")
+prepend_path("PATH", pathJoin(base, "bin"))
+prepend_path("C_INCLUDE_PATH", pathJoin(base, "include"))
+prepend_path("CPLUS_INCLUDE_PATH", pathJoin(base, "include"))
+prepend_path("LIBRARY_PATH", pathJoin(base, "lib64"))
+prepend_path("LD_LIBRARY_PATH", pathJoin(base, "lib64"))
+prepend_path("MANPATH", pathJoin(base, "share/man"))</code></pre></figure>
+
+<p>Once created, this file should be named "7.3.0-gc563.lua" because that's the name that will appear in the list of modules when a user runs the 'module avail' or 'module spider' command.
+
+<p><u>Understanding this file:</u></p>
+<p>A 'conflict' can be specified to prevent loading a potentially conflicting module (e.g., loading 2 different versions of GCC at the same time)</p>
+<p>In this example, 3 prerequisite modules are automatically loaded when this GCC module is loaded. Alternatively, you can simply specify a prerequisite using 'prereq("module/version")' to notify a user of a prerequisite without automatically trying to load it.</p>
+<p>The 'local base' statement establishes the general path for your software's various subdirectories</p>
+<p>The 'prepend_path' statements define the specific path additions for those subdirectories</p>
 
 
 
