@@ -26,8 +26,6 @@
                     </li>
                     <li> <a href=https://rutgers-oarc.github.io/amarel>Amarel</a>
                     </li>
-                    <li> <a href=https://rutgers-oarc.github.io/perceval>Perceval</a>
-                    </li>
                     <li> <a href=../experimental/>Experimental Platforms</a>
                     </li>
                 </ul>
@@ -54,9 +52,9 @@
                 <p class=lead>Users who wish to share software with the Amarel community of researchers can do so using the guidelines and suggestions presented here.</p>
 
                 
-                    <p><strong>Log-in to Amarel or Perceval and check out /projects/community</strong></p>
+                    <p><strong>Log-in to Amarel and check out /projects/community</strong></p>
                     <p>Have you created a particularly fast build of your favorite simulation tool? Have you compiled a packaged that's notoriously hard to compile? Want to share some software with collaborators within the Amarel user community?</p>
-                    <p>OARC has setup a dedicated repository for community-contributed software and associated modulefiles in /projects/community. All Amarel and Perceval users can contribute software to this repository. We have established some basic guidelines to help keep things organized.</p>
+                    <p>OARC has setup a dedicated repository for community-contributed software and associated modulefiles in /projects/community. All Amarel users can contribute software to this repository. We have established some basic guidelines to help keep things organized.</p>
                     <br>
                     <p>If you would like to see the community-contributed software packages when you run the 'module avail' or 'module spider' command, add /projects/community/modulefiles to your MODULEPATH,
 <figure class=highlight><pre><code class=language-html data-lang=html>$ export MODULEPATH=$MODULEPATH:/projects/community/modulefiles</code></pre></figure>
@@ -77,7 +75,7 @@ or add that line to your ~/.bashrc file for that setting to persist.</p>
 <br>
 <p><strong>Permissions</strong></p>
 
-<p>We've adjusted permissions (and set the sticky bit) so Amarel and Perceval users can write to /projects/community and its subdirectories.
+<p>We've adjusted permissions (and set the sticky bit) so Amarel users can write to /projects/community and its subdirectories.
 <figure class=highlight><pre><code class=language-html data-lang=html># chmod 777 /projects/community
 # chmod o+t /projects/community</code></pre></figure>
 This means that only a file's owner, a directory's owner, or root can rename or delete those files or directories, thus preventing others from modifying your contributions. You can adjust permissions of the files and directories you create, which may be necessary to enable others to use the software you place there.</p>
